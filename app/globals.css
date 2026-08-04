@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens — see DESIGN.md §2 for the reasoning behind values  */
+/* ------------------------------------------------------------------ */
+
+:root {
+  /* canvas */
+  --bg: #faf8f4;
+  --bg-soft: #f2eee4;
+  --surface: #ffffff;
+  --surface-soft: #fbf9f4;
+
+  /* ink */
+  --ink: #101e30;
+  --ink-soft: #54606e;
+  --ink-faint: #8b95a1;
+
+  /* structure */
+  --line: rgba(16, 30, 48, 0.1);
+  --line-soft: rgba(16, 30, 48, 0.06);
+
+  /* dark panels (Technology / Booking / Footer) */
+  --navy: #0c1826;
+  --navy-raise: #13233a;
+  --on-navy: #ede9df;
+  --on-navy-soft: #9fabbb;
+  --line-on-navy: rgba(237, 233, 223, 0.12);
+
+  /* metals & signals */
+  --gold: #b5975a;
+  --gold-strong: #866d3d;
+  --gold-soft: rgba(181, 151, 90, 0.13);
+  --emerald: #2f7a5b;
+  --emerald-soft: rgba(47, 122, 91, 0.12);
+  --danger: #b0523b;
+
+  /* shadows — tinted navy, never gray */
+  --shadow-soft: 0 1px 2px rgba(12, 24, 38, 0.04), 0 10px 30px -12px rgba(12, 24, 38, 0.1);
+  --shadow-lift: 0 2px 4px rgba(12, 24, 38, 0.05), 0 18px 44px -14px rgba(12, 24, 38, 0.18);
+  --shadow-glass: 0 8px 32px -8px rgba(12, 24, 38, 0.16);
+}
+
+.dark {
+  --bg: #070d16;
+  --bg-soft: #0a1220;
+  --surface: #0e1826;
+  --surface-soft: #0c1522;
+
+  --ink: #ede9df;
+  --ink-soft: #a2adba;
+  --ink-faint: #6d7885;
+
+  --line: rgba(237, 233, 223, 0.11);
+  --line-soft: rgba(237, 233, 223, 0.07);
+
+  --navy: #0d1928;
+  --navy-raise: #16283f;
+  --on-navy: #ede9df;
+  --on-navy-soft: #9fabbb;
+  --line-on-navy: rgba(237, 233, 223, 0.12);
+
+  --gold: #c9ad75;
+  --gold-strong: #d9c08a;
+  --gold-soft: rgba(201, 173, 117, 0.12);
+  --emerald: #4d9d7c;
+  --emerald-soft: rgba(77, 157, 124, 0.14);
+  --danger: #cf7a64;
+
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 30px -12px rgba(0, 0, 0, 0.5);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.35), 0 18px 44px -14px rgba(0, 0, 0, 0.6);
+  --shadow-glass: 0 8px 32px -8px rgba(0, 0, 0, 0.5);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-navy: var(--navy);
+  --color-navy-raise: var(--navy-raise);
+  --color-on-navy: var(--on-navy);
+  --color-on-navy-soft: var(--on-navy-soft);
+  --color-line-on-navy: var(--line-on-navy);
+  --color-gold: var(--gold);
+  --color-gold-strong: var(--gold-strong);
+  --color-gold-soft: var(--gold-soft);
+  --color-emerald: var(--emerald);
+  --color-emerald-soft: var(--emerald-soft);
+  --color-danger: var(--danger);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-manrope), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+
+  --shadow-soft: var(--shadow-soft);
+  --shadow-lift: var(--shadow-lift);
+  --shadow-glass: var(--shadow-glass);
+
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
+  --animate-slow-drift: slow-drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(47, 122, 91, 0.45);
+  }
+  55% {
+    box-shadow: 0 0 0 7px rgba(47, 122, 91, 0);
+  }
+}
+
+@keyframes slow-drift {
+  from {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  to {
+    transform: translate3d(0, -18px, 0) rotate(1.5deg);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                              */
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-line);
+  }
+
+  html {
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--gold) 26%, transparent);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Handcrafted utilities                                             */
+/* ------------------------------------------------------------------ */
+
+@utility glass {
+  background-color: color-mix(in srgb, var(--surface) 72%, transparent);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-glass);
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-strong);
+}
+
+@utility serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 420;
+  letter-spacing: -0.01em;
+}
+
+/* Placeholder marker — content awaiting verified clinic details.
+   Dotted gold underline + help cursor; see README "Replacing placeholders". */
+@utility ph-mark {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: color-mix(in srgb, var(--gold) 62%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  cursor: help;
+}
+
+/* Thin elegant scrollbar for horizontal scrollers */
+@utility scrollbar-hairline {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--ink) 18%, transparent) transparent;
+}
