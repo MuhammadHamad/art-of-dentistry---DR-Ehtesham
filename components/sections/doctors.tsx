@@ -22,11 +22,7 @@ export function Doctors() {
             <StaggerItem key={doctor.name}>
               <article className="group grid h-full overflow-hidden rounded-3xl border border-line bg-surface shadow-soft transition-all duration-300 ease-out-expo hover:-translate-y-1 hover:shadow-lift sm:grid-cols-[0.72fr_1.28fr]">
                 <figure className="relative aspect-[4/5] sm:aspect-auto sm:h-full">
-                  <ArtFrame
-                    variant="portrait"
-                    uid={`doctor-${i}`}
-                    label="Portrait"
-                  />
+                  <ArtFrame uid={`doctor-${i}`} />
                   <figcaption className="sr-only">
                     Placeholder reserved for a professional portrait of{" "}
                     {doctor.name}.

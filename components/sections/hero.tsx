@@ -4,7 +4,7 @@ import { Button, ButtonArrow } from "@/components/ui/button";
 import { Stars } from "@/components/ui/stars";
 import { StatusDot } from "@/components/ui/chip";
 import { Ph } from "@/components/ui/ph";
-import { ArtFrame } from "@/components/art/art-frame";
+import { PhotoFrame } from "@/components/art/photo-frame";
 import { Stagger, StaggerItem, Reveal } from "@/components/motion/reveal";
 import { Parallax } from "@/components/motion/parallax";
 import { CountUp } from "@/components/motion/count-up";
@@ -124,14 +124,16 @@ export function Hero() {
             />
             <Parallax distance={26}>
               <figure className="relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2rem] shadow-lift ring-1 ring-line">
-                <ArtFrame
-                  variant="clinic"
-                  uid="hero"
-                  label="Clinic photography · 4:5"
+                <PhotoFrame
+                  src="/images/hero-clinic.jpg"
+                  alt="A calm, modern dental treatment room with natural light"
+                  caption="Representative interior"
+                  priority
+                  sizes="(min-width: 1024px) 40vw, 90vw"
                 />
                 <figcaption className="sr-only">
-                  Placeholder artwork reserved for a photograph of the clinic
-                  interior.
+                  Representative photography of a modern dental treatment
+                  room — not this clinic's own interior.
                 </figcaption>
               </figure>
             </Parallax>

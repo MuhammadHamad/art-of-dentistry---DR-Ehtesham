@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Stagger, StaggerItem, Reveal } from "@/components/motion/reveal";
+import { PhotoFrame } from "@/components/art/photo-frame";
 import { Ph } from "@/components/ui/ph";
 import { ANCHORS } from "@/lib/site";
 import { TECHNOLOGY_ITEMS } from "@/lib/data/technology";
@@ -19,7 +20,27 @@ export function Technology() {
               lede="Every piece of equipment here had to answer one question before it was allowed in: does it make your visit shorter, safer, or more comfortable? Here's what passed — and what each one means for you."
             />
             <Reveal delay={0.15}>
-              <p className="mt-8 max-w-md rounded-2xl border border-line-on-navy bg-navy-raise p-5 text-[0.85rem] leading-[1.7] text-on-navy-soft">
+              <figure className="relative mt-8 aspect-[4/3] max-w-md overflow-hidden rounded-3xl ring-1 ring-line-on-navy">
+                <PhotoFrame
+                  src="/images/technology-operatory.jpg"
+                  alt="A fully equipped modern dental operatory"
+                  sizes="(min-width: 1024px) 40vw, 90vw"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-navy/70 via-navy/10 to-transparent"
+                />
+                <span
+                  title="Stock photography, chosen for relevance — will be replaced with the clinic's own photography"
+                  className="absolute bottom-3 left-3 cursor-help text-[0.67rem] font-medium text-on-navy-soft"
+                >
+                  Representative operatory
+                </span>
+              </figure>
+            </Reveal>
+
+            <Reveal delay={0.22}>
+              <p className="mt-6 max-w-md rounded-2xl border border-line-on-navy bg-navy-raise p-5 text-[0.85rem] leading-[1.7] text-on-navy-soft">
                 Radiation-conscious by design: digital imaging is used only
                 when it changes a decision — and you'll always be told why
                 before it's taken.

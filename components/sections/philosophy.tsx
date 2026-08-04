@@ -1,8 +1,9 @@
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
+import { PhotoFrame } from "@/components/art/photo-frame";
 import { Ph } from "@/components/ui/ph";
-import { ANCHORS, SITE } from "@/lib/site";
+import { ANCHORS } from "@/lib/site";
 
 const VALUES = [
   {
@@ -35,6 +36,16 @@ export function Philosophy() {
               title="Most dental fear isn't fear of dentists. It's fear of the"
               accent="unknown."
             />
+            <Reveal delay={0.15}>
+              <figure className="relative mt-9 aspect-[4/3] overflow-hidden rounded-3xl shadow-soft ring-1 ring-line">
+                <PhotoFrame
+                  src="/images/philosophy-consultation.jpg"
+                  alt="A dentist talking through a treatment plan with a patient before any work begins"
+                  caption="Representative consultation"
+                  sizes="(min-width: 1024px) 40vw, 90vw"
+                />
+              </figure>
+            </Reveal>
           </div>
 
           {/* Story */}

@@ -10,6 +10,7 @@ import {
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Stagger, StaggerItem } from "@/components/motion/reveal";
+import { PhotoFrame } from "@/components/art/photo-frame";
 import { Ph } from "@/components/ui/ph";
 import { ANCHORS } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -31,14 +32,21 @@ function CellIcon({ icon: Icon }: { icon: React.ElementType }) {
 
 function Cell({
   className,
+  padded = true,
   children,
 }: {
   className?: string;
+  padded?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <StaggerItem className={cn("h-full", className)}>
-      <div className="group flex h-full flex-col rounded-3xl border border-line bg-surface p-7 shadow-soft transition-all duration-300 ease-out-expo hover:-translate-y-1 hover:shadow-lift md:p-8">
+      <div
+        className={cn(
+          "group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-surface shadow-soft transition-all duration-300 ease-out-expo hover:-translate-y-1 hover:shadow-lift",
+          padded && "p-7 md:p-8"
+        )}
+      >
         {children}
       </div>
     </StaggerItem>
@@ -148,21 +156,33 @@ export function WhyUs() {
             </p>
           </Cell>
 
-          {/* 6 — Comfort (wide) */}
-          <Cell className="lg:col-span-2">
-            <div className="flex items-start justify-between gap-4">
-              <CellIcon icon={Armchair} />
-              <span className="eyebrow mt-2.5 hidden sm:block">Designed for calm</span>
+          {/* 6 — Comfort (wide, with photo) */}
+          <Cell className="lg:col-span-2" padded={false}>
+            <div className="grid h-full sm:grid-cols-[1.3fr_1fr]">
+              <div className="flex flex-col p-7 md:p-8">
+                <div className="flex items-start justify-between gap-4">
+                  <CellIcon icon={Armchair} />
+                  <span className="eyebrow mt-2.5 hidden sm:block">Designed for calm</span>
+                </div>
+                <h3 className="mt-5 font-display text-[1.45rem] leading-snug font-bold tracking-[-0.02em] text-ink">
+                  A clinic designed to lower your shoulders.
+                </h3>
+                <p className="mt-3 max-w-xl text-[0.95rem] leading-[1.75] text-ink-soft">
+                  Soft light instead of glare. A waiting room that doesn't
+                  smell like a warning. Appointments spaced so you're never
+                  stacked behind a crowd. The absence of stress is something
+                  we design for as deliberately as the dentistry itself.
+                </p>
+              </div>
+              <figure className="relative hidden min-h-[14rem] sm:block">
+                <PhotoFrame
+                  src="/images/comfort-child.jpg"
+                  alt="A relaxed child smiling in the dental chair"
+                  caption="Representative photography"
+                  sizes="(min-width: 1024px) 20vw, 40vw"
+                />
+              </figure>
             </div>
-            <h3 className="mt-5 font-display text-[1.45rem] leading-snug font-bold tracking-[-0.02em] text-ink">
-              A clinic designed to lower your shoulders.
-            </h3>
-            <p className="mt-3 max-w-xl text-[0.95rem] leading-[1.75] text-ink-soft">
-              Soft light instead of glare. A waiting room that doesn't smell
-              like a warning. Appointments spaced so you're never stacked
-              behind a crowd. The absence of stress is something we design for
-              as deliberately as the dentistry itself.
-            </p>
           </Cell>
         </Stagger>
       </Container>

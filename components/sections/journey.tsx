@@ -2,6 +2,7 @@ import { HeartHandshake } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Stagger, StaggerItem, Reveal } from "@/components/motion/reveal";
+import { PhotoFrame } from "@/components/art/photo-frame";
 import { Ph } from "@/components/ui/ph";
 import { ANCHORS } from "@/lib/site";
 import { JOURNEY_STEPS, ANXIETY_PROTOCOL } from "@/lib/data/journey";
@@ -47,14 +48,24 @@ export function Journey() {
         {/* Anxiety protocol */}
         <Reveal delay={0.1} className="mt-16">
           <div className="grid overflow-hidden rounded-3xl border border-line bg-surface shadow-soft md:grid-cols-[1fr_1.35fr]">
-            <div className="flex flex-col justify-center gap-4 bg-bg-soft p-8 md:p-10">
-              <span className="inline-flex size-11 items-center justify-center rounded-2xl bg-gold-soft text-gold-strong">
+            <div className="relative flex min-h-[16rem] flex-col justify-center gap-4 p-8 md:p-10">
+              <PhotoFrame
+                src="/images/experience-calm.jpg"
+                alt="A patient reclined and at ease during a gentle, unhurried appointment"
+                className="absolute inset-0"
+                sizes="(min-width: 768px) 30vw, 90vw"
+              />
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-gradient-to-t from-bg via-bg/85 to-bg/35"
+              />
+              <span className="relative inline-flex size-11 items-center justify-center rounded-2xl bg-gold-soft text-gold-strong">
                 <HeartHandshake aria-hidden="true" className="size-[1.3rem]" strokeWidth={1.6} />
               </span>
-              <h3 className="font-display text-[1.5rem] leading-[1.25] font-bold tracking-[-0.02em] text-balance text-ink">
+              <h3 className="relative font-display text-[1.5rem] leading-[1.25] font-bold tracking-[-0.02em] text-balance text-ink">
                 {ANXIETY_PROTOCOL.title}
               </h3>
-              <p className="text-[0.93rem] leading-[1.7] text-ink-soft">
+              <p className="relative text-[0.93rem] leading-[1.7] text-ink-soft">
                 {ANXIETY_PROTOCOL.intro}
               </p>
             </div>

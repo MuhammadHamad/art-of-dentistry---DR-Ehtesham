@@ -6,12 +6,18 @@ import { stripPh } from "@/lib/utils";
 /**
  * JSON-LD structured data.
  *
- * Deliberately conservative: no aggregateRating and no openingHours until the
- * clinic supplies verified figures (publishing invented review data in schema
- * markup violates Google's guidelines and this project's ethics protocol).
- * TODO before launch: replace placeholder address/phone via lib/site.ts —
- * these builders strip the [brackets] automatically.
+ * Deliberately conservative: no openingHours until the clinic confirms them,
+ * and aggregateRating is included only because SITE.metrics.rating/reviewCount
+ * are verified figures (pulled from the clinic's own Google Maps listing) —
+ * publishing invented review data in schema markup violates Google's
+ * guidelines and this project's ethics protocol. If those metrics ever
+ * revert to bracketed placeholders, the rating is automatically omitted.
+ * TODO before launch: replace remaining placeholders (phone, email, hours)
+ * via lib/site.ts — these builders strip the [brackets] automatically.
  */
+
+const hasVerifiedRating =
+  !SITE.metrics.rating.includes("[") && !SITE.metrics.reviewCount.includes("[");
 
 export function dentistSchema() {
   return {
@@ -27,6 +33,7 @@ export function dentistSchema() {
       streetAddress: stripPh(SITE.address.street),
       addressLocality: SITE.address.city,
       addressRegion: SITE.address.region,
+      postalCode: SITE.address.postalCode,
       addressCountry: "PK",
     },
     telephone: stripPh(SITE.phoneDisplay),
@@ -35,6 +42,13 @@ export function dentistSchema() {
     sameAs: [SITE.mapsUrl],
     priceRange: "PKR",
     medicalSpecialty: "Dentistry",
+    ...(hasVerifiedRating && {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: SITE.metrics.rating,
+        reviewCount: SITE.metrics.reviewCount,
+      },
+    }),
     availableService: TREATMENTS.map((t) => ({
       "@type": "MedicalProcedure",
       name: t.name,

@@ -7,14 +7,19 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
+import Image from "next/image";
 import { ChevronsLeftRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/motion/reveal";
-import { ArtFrame } from "@/components/art/art-frame";
 import { Ph } from "@/components/ui/ph";
 import { ANCHORS } from "@/lib/site";
 import { cn } from "@/lib/utils";
+
+const GALLERY_PHOTO = {
+  src: "/images/gallery-smile-reveal.jpg",
+  alt: "A patient smiling while looking at her teeth in a hand mirror",
+};
 
 const CASES = [
   {
@@ -47,7 +52,7 @@ export function Gallery() {
           eyebrow="Smile gallery"
           title="Evidence, not"
           accent="adjectives."
-          lede="Drag the divider. Real before-and-after cases will live here — added only with each patient's written consent. Until then, the frames hold placeholder artwork."
+          lede="Drag the divider — it's a simulated brightening effect on one photo, standing in for the idea until real before-and-after cases join here, added only with each patient's written consent."
         />
 
         <div className="mt-14 grid gap-10 lg:grid-cols-[1.35fr_0.65fr]">
@@ -142,26 +147,39 @@ function CompareSlider() {
         dragging ? "cursor-grabbing" : "cursor-grab"
       )}
     >
-      {/* after (base layer) */}
-      <ArtFrame variant="smile-after" uid="after" showTag={false} />
+      {/* after (base layer) — the photo, unaltered */}
+      <Image
+        src={GALLERY_PHOTO.src}
+        alt={GALLERY_PHOTO.alt}
+        fill
+        sizes="(min-width: 1024px) 55vw, 90vw"
+        className="object-cover"
+      />
       <span className="absolute right-3 bottom-3 rounded-full bg-white/80 px-3 py-1 text-[0.7rem] font-semibold tracking-[0.08em] text-[#54606E] uppercase backdrop-blur-md">
         After
       </span>
 
-      {/* before (clipped layer) */}
+      {/* before (clipped layer) — same photo, filtered to simulate a duller smile */}
       <motion.div style={{ clipPath }} className="absolute inset-0">
-        <ArtFrame variant="smile-before" uid="before" showTag={false} />
+        <Image
+          src={GALLERY_PHOTO.src}
+          alt=""
+          aria-hidden="true"
+          fill
+          sizes="(min-width: 1024px) 55vw, 90vw"
+          className="object-cover [filter:saturate(0.55)_sepia(0.35)_brightness(0.86)_contrast(0.94)]"
+        />
         <span className="absolute bottom-3 left-3 rounded-full bg-white/80 px-3 py-1 text-[0.7rem] font-semibold tracking-[0.08em] text-[#54606E] uppercase backdrop-blur-md">
           Before
         </span>
       </motion.div>
 
-      {/* placeholder tag */}
+      {/* illustrative tag */}
       <span
-        title="Placeholder artwork — replace with consented patient photography"
+        title="A color filter applied to the same photograph — illustrative, not an actual patient's before-and-after"
         className="absolute top-3 left-3 z-10 cursor-help rounded-full border border-black/8 bg-white/78 px-2.5 py-1 text-[0.67rem] font-medium text-[#54606E] backdrop-blur-md"
       >
-        Placeholder artwork
+        Simulated effect, one photo
       </span>
 
       {/* divider + handle */}

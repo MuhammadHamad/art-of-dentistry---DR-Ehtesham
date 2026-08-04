@@ -46,19 +46,27 @@ Find them all with:
 grep -rn "\[" lib/site.ts lib/data
 ```
 
+### Already verified (pulled from the clinic's real Google Maps listing)
+
+- [x] Street address, area, postal code (`SITE.address`) — "Office 55, 2nd
+      Floor, Uhad Tower, University Road, Shaheen Town, Peshawar, 25120"
+- [x] Google rating & review count (`SITE.metrics.rating/reviewCount`) —
+      **5.0 from 10 reviews** at the time of writing. This is a small review
+      count — re-check it periodically and update the figure (and the
+      `aggregateRating` it feeds in `lib/schema.ts`) as it grows.
+
 ### The checklist
 
 **Identity & contact** (`lib/site.ts`)
 - [ ] Real phone number (`phoneDisplay`, `phoneIntl`, `whatsappIntl` — intl digits, no `+`)
 - [ ] Email address
-- [ ] Street address, area, landmark
+- [ ] Nearby landmark (street address is already verified — see above)
 - [ ] Opening hours (all three rows)
 - [ ] Production domain (`url`) — also referenced by sitemap/robots/OG
 - [ ] Instagram / Facebook URLs (`socials[].href`)
 
 **Trust figures** (`lib/site.ts → metrics`)
-- [ ] Google rating & review count (copy the live values; update occasionally)
-- [ ] Years in practice, patient-visit count (also mirrored in `components/sections/hero.tsx → STATS`)
+- [ ] Years in practice, patient-visit count (also mirrored in `components/sections/hero.tsx → STATS`) — rating/review count are already verified, see above
 
 **People** (`lib/data/doctors.ts`)
 - [ ] Dr. Ehtesham's surname, degrees, university, postgraduate qualification, years
@@ -77,21 +85,36 @@ intended standard of care; confirm each is true in practice or soften it:
       patient's permission). Never launch with the samples.
 
 **Schema** (`lib/schema.ts`)
-- `aggregateRating` and `openingHoursSpecification` are deliberately omitted —
-  add them only once real values exist.
+- `aggregateRating` is now included automatically (rating/review count are
+  verified — see above); it disappears on its own if those ever revert to
+  bracketed placeholders. `openingHoursSpecification` is still omitted until
+  hours are confirmed.
 
-## Replacing placeholder artwork
+## Photography
 
-Photography slots are rendered by `components/art/art-frame.tsx` as abstract
-brand-palette compositions, each labelled on-site. Swap each `<ArtFrame …>` for
-a `next/image` `<Image>` when real photos exist:
+Real photography is used throughout (`public/images/*.jpg`) — free, licensed
+stock (Pexels, free for commercial use, no attribution required) chosen to be
+genuinely relevant to each section, not the clinic's own photos. Each is
+captioned honestly on-site ("Representative interior/consultation/…") via
+`components/art/photo-frame.tsx`, so nothing implies it depicts this specific
+clinic. Swap the file in `public/images/` (keep the same filename, or update
+the `src` in the section component) once real, consented clinic photography
+exists:
 
-| Slot | Where | Suggested shot |
+| File | Used in | Shows |
 |---|---|---|
-| `clinic` (4:5) | Hero | Signature interior — reception or operatory, natural light |
-| `portrait` ×2 (4:5) | Doctors | Consistent portraits, same background & light |
-| `smile-before` / `smile-after` | Gallery slider | Consented before/after cases, identical framing |
-| Map facade | Location | Loads the real Google embed on click — no change needed |
+| `hero-clinic.jpg` | Hero | A bright, minimal treatment room |
+| `philosophy-consultation.jpg` | Philosophy | A dentist talking through a plan with a patient |
+| `comfort-child.jpg` | Why Us → Comfort cell | A relaxed child in the chair |
+| `technology-operatory.jpg` | Technology | A fully equipped operatory |
+| `experience-calm.jpg` | Experience → anxiety-protocol card | A calm, reclined patient |
+| `gallery-smile-reveal.jpg` | Smile gallery | One photo; the "before" state is a CSS filter (desaturate/sepia/darken) on the *same* image, not a second real outcome — see the comment in `components/sections/gallery.tsx` |
+
+**Doctors are the one exception.** Their portrait slot stays an abstract
+illustration (`components/art/art-frame.tsx`) rather than a stock photo,
+because attaching a stranger's face to a real, named person (Dr. Ehtesham,
+the associate doctor) would misrepresent who they are. Replace it with an
+actual verified portrait, not stock photography, when one is available.
 
 ## Notable engineering details
 
@@ -100,11 +123,12 @@ a `next/image` `<Image>` when real photos exist:
 - **Booking**: validates name + Pakistani mobile format, then opens
   `wa.me/<number>` with a structured message. Treatment cards prefill the form
   via a `aod:prefill-treatment` CustomEvent.
-- **Map**: click-to-load facade — Google's iframe never touches first paint.
+- **Map**: the real, live Google Maps embed for the clinic loads with the
+  section (`components/sections/map-embed.tsx`) — no click required.
 - **SEO**: metadata API, OG image generated at build (`app/opengraph-image.tsx`),
   `robots.ts`, `sitemap.ts`, JSON-LD (`Dentist` + `FAQPage`).
 - **Accessibility**: skip link, landmarks, labeled controls, `aria-expanded`
   accordions, keyboard-operable compare slider (arrow keys), gold focus rings,
   `prefers-reduced-motion` renders everything static.
-- **Performance**: fully static prerender, inline SVG art (zero image
-  requests), self-hosted fonts, ~183 kB first-load JS.
+- **Performance**: fully static prerender, self-hosted fonts, responsive
+  `next/image` throughout.

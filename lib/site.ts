@@ -35,11 +35,12 @@ export const SITE = {
   whatsappIntl: "923000000000",
   email: "[hello@artofdentistry.pk]",
 
-  // ── Address (placeholders) ──────────────────────────────────────────
+  // ── Address (verified via the clinic's Google Maps listing) ─────────
   address: {
-    street: "[Street address — e.g. Main University Road]",
-    area: "[Area — e.g. Hayatabad]",
+    street: "Office 55, 2nd Floor, Uhad Tower, University Road",
+    area: "Shaheen Town",
     landmark: "[Nearby landmark — e.g. opposite City Tower]",
+    postalCode: "25120",
     city: "Peshawar",
     region: "Khyber Pakhtunkhwa",
     country: "Pakistan",
@@ -52,10 +53,11 @@ export const SITE = {
     { days: "Sunday", time: "[By appointment]" },
   ],
 
-  // ── Trust metrics (placeholders — never publish unverified figures) ─
+  // ── Trust metrics — rating/reviewCount verified via Google Maps;
+  //    years/patientVisits remain placeholders (unverifiable from Maps) ─
   metrics: {
-    rating: "[4.9]",
-    reviewCount: "[200+]",
+    rating: "5.0",
+    reviewCount: "10",
     yearsInPractice: "[12]+",
     patientVisits: "[15,000]+",
   },

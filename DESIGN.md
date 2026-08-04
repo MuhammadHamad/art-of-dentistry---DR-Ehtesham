@@ -264,7 +264,7 @@ lib/
 components/
   ui/        Button · Container · SectionHeading · Chip · Stars · Ph (placeholder renderer)
   motion/    Reveal · Stagger · CountUp · Parallax
-  art/       Monogram · ArtFrame (placeholder "photography" compositions)
+  art/       Monogram · ArtFrame (abstract doctor-portrait placeholder) · PhotoFrame (real, captioned stock photography)
   layout/    Navbar · Footer · ScrollProgress · FloatingCta · ThemeToggle
   sections/  Hero · Philosophy · WhyUs · Treatments · Technology · Journey · Gallery
              · Doctors · Testimonials · Pricing · Faq · Booking · Location
@@ -285,8 +285,21 @@ Nothing on this site invents a fact. The rule:
   while remaining honest.
 - `README.md` carries the full replacement checklist plus a "claims to confirm with the
   clinic" list (sterilization protocol, emergency availability, payment methods…).
-- No fabricated reviews in schema.org markup: `aggregateRating` is deliberately omitted
-  until real figures exist. Testimonials are marked as illustrative samples in code and
-  attributed to `[Patient name]`.
+- Where a fact *is* verifiable — the clinic's real Google Maps listing gives an exact
+  address, a 5.0 rating and a review count — it's used as-is, brackets removed, and
+  `aggregateRating` in `lib/schema.ts` includes it automatically. The rule isn't
+  "never claim a number," it's "never claim an unverified one."
+- Photography (`components/art/photo-frame.tsx`) is real, relevant, licensed stock —
+  not this clinic's own interior or people — captioned honestly ("Representative
+  interior/consultation/…") rather than left generic. The one exception: named doctors'
+  portraits stay an abstract illustration (`ArtFrame`), because attaching a stranger's
+  face to a real, specific person's name would misrepresent who they are — a different
+  and more serious problem than an unbranded interior shot. The smile-gallery slider
+  uses one real photo twice, with a CSS filter simulating the "before" state, so it can
+  never be read as two different people's real outcomes.
+- No fabricated reviews in schema.org markup: `aggregateRating` only appears when the
+  underlying figures are verified (see above), never invented. Testimonials remain
+  marked as illustrative samples in code and attributed to `[Patient name]` — a real
+  address doesn't make up for a fabricated quote.
 - Copy avoids medical guarantees ("painless", "permanent", "100%") in favor of honest
   framing — which is also simply better luxury copywriting.
