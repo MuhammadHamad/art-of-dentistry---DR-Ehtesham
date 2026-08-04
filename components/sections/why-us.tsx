@@ -149,7 +149,7 @@ export function WhyUs() {
               Calm hands, thousands of cases.
             </h3>
             <p className="mt-3 text-[0.92rem] leading-[1.7] text-ink-soft">
-              Led by <Ph text="Dr. Ehtesham [Surname]" /> with{" "}
+              Led by Dr. Ehtesham with{" "}
               <Ph text="[12]+" /> years in practice — the steadiness you feel
               in the chair is pattern recognition earned over{" "}
               <Ph text="[15,000]+" /> patient visits.

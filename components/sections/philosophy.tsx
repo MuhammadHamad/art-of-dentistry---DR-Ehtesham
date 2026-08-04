@@ -66,8 +66,7 @@ export function Philosophy() {
                 <strong>if it were our own tooth, would we treat it this way?</strong>
               </p>
               <p>
-                Founded <Ph text="[in YEAR]" /> by{" "}
-                <Ph text="Dr. Ehtesham [Surname]" />, the practice has grown the
+                Founded <Ph text="[in YEAR]" /> by Dr. Ehtesham, the practice has grown the
                 way good clinics tend to: quietly, by referral, one reassured
                 patient recommending us to the next.
               </p>

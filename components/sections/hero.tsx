@@ -20,7 +20,13 @@ const STATS: Array<{
 }> = [
   { value: 12, suffix: "+", label: "Years in practice", placeholder: true },
   { value: 15000, suffix: "+", label: "Patient visits", placeholder: true },
-  { value: 4.9, decimals: 1, suffix: " / 5", label: "Google rating", placeholder: true },
+  {
+    value: Number(SITE.metrics.rating),
+    decimals: 1,
+    suffix: " / 5",
+    label: "Google rating",
+    placeholder: false,
+  },
   { value: TREATMENT_COUNT, suffix: "", label: "Treatments under one roof", placeholder: false },
 ];
 

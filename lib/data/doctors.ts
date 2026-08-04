@@ -17,7 +17,7 @@ export interface Doctor {
 
 export const DOCTORS: Doctor[] = [
   {
-    name: "Dr. Ehtesham [Surname]",
+    name: "Dr. Ehtesham",
     role: "Founder & Principal Dentist",
     credentials: "[BDS — University] · [Postgraduate qualification / FCPS]",
     experience: "[12]+ years in practice",

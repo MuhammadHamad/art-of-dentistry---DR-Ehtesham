@@ -67,12 +67,7 @@ export function Testimonials() {
               </div>
               <div className="pt-8">
                 <p className="font-display text-[3rem] leading-none font-extrabold tracking-[-0.03em]">
-                  <span
-                    className="ph-mark"
-                    title="Placeholder figure — replace with the clinic's live Google rating"
-                  >
-                    <CountUp value={4.9} decimals={1} />
-                  </span>
+                  <CountUp value={Number(SITE.metrics.rating)} decimals={1} />
                 </p>
                 <p className="mt-3 text-[0.9rem] leading-[1.6] text-on-navy-soft">
                   Average of <Ph text={SITE.metrics.reviewCount} /> public
