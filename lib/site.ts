@@ -28,11 +28,11 @@ export const SITE = {
     "https://www.google.com/maps/place/Art+of+Dentistry+Dental+Clinic/",
   mapsEmbedQuery: "Art of Dentistry Dental Clinic, Peshawar",
 
-  // ── Contact (all placeholders — replace with real numbers) ──────────
-  phoneDisplay: "[+92 300 0000000]",
+  // ── Contact (phone verified by the clinic; email still a placeholder) ─
+  phoneDisplay: "+92 337 6060740",
   /** International format, digits only — used to build wa.me / tel: links. */
-  phoneIntl: "923000000000",
-  whatsappIntl: "923000000000",
+  phoneIntl: "923376060740",
+  whatsappIntl: "923376060740",
   email: "[hello@artofdentistry.pk]",
 
   // ── Address (verified via the clinic's Google Maps listing) ─────────
